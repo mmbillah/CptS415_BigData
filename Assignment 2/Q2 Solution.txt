@@ -1,0 +1,281 @@
+
+import java.io.*; 
+import java.util.*; 
+import java.util.LinkedList; 
+ 
+class Graph 
+{ 
+    private int V;  
+    private LinkedList<Integer> adj[];
+    Graph(int v) 
+    { 
+        V=v; 
+        adj = new LinkedList[v]; 
+        for (int i=0;i<v;++i) 
+            adj[i]=new LinkedList(); 
+    } 
+    
+     public static void main(String args[]) 
+    { 
+        Scanner sc=new Scanner(System.in);
+    
+        int n=sc.nextInt();
+        System.out.println("Enter No of Nodes in Graph  "+n);
+   
+        int e=sc.nextInt();
+             System.out.println("Enter No of Edges in Graph "+e);
+        
+        Graph g = new Graph(n); 
+        System.out.println("Enter Edges pair that are connected in Graph ");
+        for(int i=0;i<e;i++)
+        {
+            int x=sc.nextInt();
+            int y=sc.nextInt();
+        g.addEdge(x, y);
+        }
+       
+       System.out.println("Graph is Ready!!!");
+       while(true)
+       {
+       System.out.println("Enter Source and Target for Path Checking!!");
+       
+        int u=sc.nextInt();
+        int v=sc.nextInt(); 
+        if (g.islink(u, v)) 
+            System.out.println("There exits a path from node "+u+" to "+v); 
+        else
+           System.out.println("There is no path exits from node "+u+" to "+v); 
+         
+         System.out.println("Want to continue Enter 1 or exit 0");
+         int p=sc.nextInt();
+         if(p==0)
+          break;
+            
+       }
+ 
+    } 
+    void addEdge(int v,int w) 
+    {   
+        adj[v].add(w);   
+        
+    } 
+    Boolean islink(int s,int d) 
+    { 
+        LinkedList<Integer>temp; 
+        boolean visited[] = new boolean[V]; 
+        LinkedList<Integer> queue = new LinkedList<Integer>(); 
+        visited[s]=true; 
+        queue.add(s); 
+        Iterator<Integer> i; 
+        while (queue.size()!=0) 
+        { 
+            s = queue.poll(); 
+            int n; 
+            i = adj[s].listIterator(); 
+            while (i.hasNext()) 
+            { 
+                n = i.next(); 
+                if (n==d) 
+                    return true; 
+                if (!visited[n]) 
+                { 
+                    visited[n] = true; 
+                    queue.add(n); 
+                } 
+            } 
+        } 
+        return false; 
+    } 
+   
+} 
+Test Cases :
+
+Input :
+
+4
+6
+0 1
+0 2
+1 2
+2 0
+2 3
+3 3
+1 3
+1
+3 1
+0
+
+Output :
+
+Enter No of Nodes in Graph  4
+Enter No of Edges in Graph 6
+Enter Edges pair that are connected in Graph 
+Graph is Ready!!!
+Enter Source and Target for Path Checking!!
+There exits a path from node 1 to 3
+Want to continue Enter 1 or exit 0
+Enter Source and Target for Path Checking!!
+There is no path exits from node 3 to 1
+Want to continue Enter 1 or exit 0
+
+
+Question b:
+
+This takes O(|V|+|E|) time to compute most reliable path between given source and target.
+
+This problem is more similar to Dijsktra's Algorithm in which we try to find shortest path from Given source to Destination.
+
+But here we have to find maximum probability sum between source and target so that that path can be called se most reliable path.
+
+Here i just modified Dijsktra algorithm and try to find solution for above problem.
+
+and then provide source and destination.
+
+import java.io.*; 
+import java.util.*; 
+import java.util.LinkedList; 
+ 
+class GraphReliablePath
+{ 
+    int V;
+    Vector<Integer> []adj; 
+    static int level;
+    
+    GraphReliablePath(int V) 
+        { 
+            this.V = V; 
+            this.adj = new Vector[2*V]; 
+            for (int i=0;i<2*V;i++) 
+                this.adj[i]=new Vector<>(); 
+        } 
+        
+     public static void main(String args[]) 
+    { 
+        Scanner sc=new Scanner(System.in);
+    
+        int n=sc.nextInt();
+        System.out.println("Enter No of Nodes in Graph  "+n);
+   
+        int e=sc.nextInt();
+             System.out.println("Enter No of Edges in Graph "+e);
+        
+        GraphReliablePath g = new GraphReliablePath(n); 
+        System.out.println("Enter Edges pair and weight between that are connected in Graph ");
+        for(int i=0;i<e;i++)
+        {
+            int x=sc.nextInt();
+            int y=sc.nextInt();
+            int w=sc.nextInt();
+        g.addEdge(x,y,w);
+        }
+       
+       System.out.println("Graph is Ready!!!");
+       while(true)
+       {
+       System.out.println("Enter Source and Target for Reliable Path Checking!!");
+       
+        int u=sc.nextInt();
+        int v=sc.nextInt(); 
+         g.findReliablePath(u, v); 
+         
+         System.out.println("\n Want to continue Enter 1 or exit 0");
+         int p=sc.nextInt();
+         if(p==0)
+          break;
+            
+       }
+ 
+    } 
+    void addEdge(int v,int w,int weight) 
+    {   
+        if (weight==1)  
+           { 
+                adj[v].add(v + this.V); 
+                adj[v+this.V].add(w); 
+           }
+            else 
+                adj[v].add(w);
+        adj[v].add(w);   
+        
+    } 
+    
+    public int printPath(int[] parent,int s,int d) 
+        { 
+            level = 0; 
+            if (parent[s] == -1) 
+            { 
+                System.out.printf(" Reliable Path between "+" %d and %d is %s ",s,d,s);
+               // System.out.println();
+                return level; 
+            } 
+            printPath(parent,parent[s],d); 
+            level++; 
+            if (s < this.V) 
+                System.out.printf("%d ",s); 
+            return level; 
+        } 
+  
+    
+    public int findReliablePath(int src,int dest) 
+        { 
+            boolean[] visited=new boolean[2*this.V]; 
+            int[] parent=new int[2*this.V]; 
+            for (int i=0;i<2*this.V;i++)  
+            { 
+                visited[i]=false; 
+                parent[i]=-1; 
+            } 
+            Queue<Integer> queue=new LinkedList<>(); 
+            visited[src]=true; 
+            queue.add(src); 
+            while(!queue.isEmpty())  
+            { 
+                int s=queue.peek(); 
+                if(s==dest) 
+                    return printPath(parent,s,dest); 
+                queue.poll(); 
+                for (int i:this.adj[s])  
+                { 
+                    if(!visited[i])  
+                    { 
+                        visited[i]=true; 
+                        queue.add(i); 
+                        parent[i]=s; 
+                    } 
+                } 
+            } 
+            return 0; 
+        } 
+     
+   
+} 
+Test Cases:
+
+Input :
+
+4
+7
+0 1 0
+0 2 1
+1 2 1
+1 3 0
+2 0 1
+2 3 1
+3 3 1
+0 3
+1
+2 3
+0
+
+Output :
+
+Enter No of Nodes in Graph  4
+Enter No of Edges in Graph 7
+Enter Edges pair and weight between that are connected in Graph 
+Graph is Ready!!!
+Enter Source and Target for Reliable Path Checking!!
+ Reliable Path between  0 and 3 is 0 1 3 
+ Want to continue Enter 1 or exit 0
+Enter Source and Target for Reliable Path Checking!!
+ Reliable Path between  2 and 3 is 2 3 
+ Want to continue Enter 1 or exit 0

@@ -1,0 +1,51 @@
+<Airports>
+   
+   <Airport>
+      <AirportID> 507 </AirportID>
+      <Name> London Heathrow Airport </Name>
+      <City> London </City>
+      <Country> United Kingdom </Country>
+      <IATA> LHR </IATA>
+      <ICAO> EGLL </ICAO>
+      <Latitude> 51.4706 </Latitude>
+      <Longitude> - 0.461941 </Longitude>
+      <Altitude> 83 </Altitude>  
+   </Airport>
+
+   <Airport>
+      <AirportID> 26 </AirportID>
+      <Name> Kugaaruk Airport </Name>
+      <City> Pelly Bay </City>
+      <Country> Canada </Country>
+      <IATA> YBB </IATA>
+      <ICAO> CYBB </ICAO>
+      <Latitude> 68.534401 </Latitude>
+      <Longitude> - 89.808098 </Longitude>
+      <Altitude> 56 </Altitude>  
+   </Airport>
+
+   <Airport>
+      <AirportID> 3127 </AirportID>
+      <Name> Pokhara Airport </Name>
+      <City> Pokhara </City>
+      <Country> Nepal </Country>
+      <IATA> PKR </IATA>
+      <ICAO> VNPK </ICAO>
+      <Latitude> 28.200899 </Latitude>
+      <Longitude> 83.982101 </Longitude>
+      <Altitude> 2712 </Altitude>  
+   </Airport>
+ 
+   <Airport>
+      <AirportID>  8810 </AirportID>
+      <Name> Hamburg Hbf </Name>
+      <City> Hamburg </City>
+      <Country> Germany </Country>
+      <IATA> ZMB </IATA>
+      <ICAO> \N </ICAO>
+      <Latitude> 53.552776 </Latitude>
+      <Longitude> 10.006683 </Longitude>
+      <Altitude> 30 </Altitude>  
+   </Airport>
+
+</Airports>

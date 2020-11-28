@@ -1,0 +1,15 @@
+<xs:element name="Route" maxOccurs="unbounded">
+  <xs:complexType>
+    <xs:sequence>
+      <xs:element name="Airline" type="xs:string"/>
+      <xs:element name="AirlineID" type="xs:positiveInteger"/>
+      <xs:element name="SourceAirport" type="xs:string"/>
+      <xs:element name="SourceAirportID" type="xs:positiveInteger"/>
+      <xs:element name="DestinationAirport" type="xs:string"/>
+      <xs:element name="DestinationAirportID" type="xs:positiveInteger"/>
+      <xs:element name="Codeshare" type="xs:string" nillable="true"/>  
+      <xs:element name="Stops" type="xs:positiveInteger"/>
+      <xs:element name="Equipment" type="xs:positiveInteger"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:element>

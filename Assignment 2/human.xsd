@@ -1,0 +1,86 @@
+#classes and subclasses
+
+<rdfs:Class rdfs:about="Human">
+	<rdfs:comment>
+		The class of Human. This class indicates a human being.
+		Superclass of all Man and Human classes.
+	</rdfs:comment>
+</rdfs:Class>
+
+<rdfs:Class rdfs:about="AnotherHuman">
+	<rdfs:comment>
+		The class of AnotherHuman.
+		This class indicates a different human being.
+		This might also have sub classes Man and Woman (not cosidered here).
+	</rdfs:comment>
+</rdfs:Class>
+
+<rdfs:Class rdfs:about="Man">
+	<rdfs:comment>
+		The class of Man. Subclass of Human.
+	</rdfs:comment>
+	<rdfs:subClassOf rdfs:resource="Human"/>
+</rdfs:Class>
+
+<rdfs:Class rdfs:about="Woman">
+	<rdfs:comment>
+		The class of Woman. Subclass of Human.
+	</rdfs:comment>
+	<rdfs:subClassOf rdfs:resource="Human"/>
+</rdfs:Class>
+
+<rdfs:Class rdfs:about="Literals">
+	<rdfs:comment>
+		The class of Literals. 
+		Holds information of birth year for Human class.
+	</rdfs:comment>
+</rdfs:Class>
+
+#properties and subproperties
+
+<rdfs:Property rdfs:about="canBe">
+    <rdfs:domain rdfs:resource="Human" />
+    <rdfs:range rdfs:resource="Man" />
+    <rdfs:range rdfs:resource="Woman" />
+</rdfs:Property>
+
+<rdfs:Property rdfs:about="canMarry">
+    <rdfs:domain rdfs:resource="Human" />
+    <rdfs:range rdfs:resource="AnotherHuman" />
+</rdfs:Property>
+
+<rdfs:Property rdfs:about="canLike">
+    <rdfs:comment>
+        Inherits its domain ("Human") and range ("AnotherHuman")
+        from its superproperty "canMarry".
+    </rdfs:comment>
+    <rdfs:domain rdfs:resource="Human" />
+    <rdfs:range rdfs:resource="AnotherHuman" />
+    <rdfs:subPropertyOf rdfs:resource="canMarry"/>
+</rdfs:Property>
+
+<rdfs:Property rdfs:about="isParentOf">
+    <rdfs:domain rdfs:resource="Human" />
+    <rdfs:range rdfs:resource="AnotherHuman" />
+</rdfs:Property>
+
+<rdfs:Property rdfs:about="canFather">
+    <rdfs:domain rdfs:resource="Man" />
+    <rdfs:range rdfs:resource="AnotherHuman" />
+    <rdfs:subPropertyOf rdfs:resource="isParentOf"/>
+</rdfs:Property>
+
+<rdfs:Property rdfs:about="canMother">
+    <rdfs:comment>
+        Inherits its domain ("Woman") and range ("AnotherHuman")
+        from its superproperty "isParentOf".
+    </rdfs:comment>
+    <rdfs:domain rdfs:resource="Woman" />
+    <rdfs:range rdfs:resource="AnotherHuman" />
+    <rdfs:subPropertyOf rdfs:resource="isParentOf"/>
+</rdfs:Property>
+
+<rdfs:Property rdfs:about="BirthYear">
+    <rdfs:domain rdfs:resource="Human" />
+    <rdfs:range rdfs:resource="Literals" />
+</rdfs:Property>
